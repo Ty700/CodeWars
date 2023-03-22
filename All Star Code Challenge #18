@@ -16,9 +16,6 @@ In languages with no distinct character data type, the second argument will be a
 #include <string>
 
 unsigned int strCount(const std::string& word, char letter){
-  if(word.find(letter) == std::string::npos){
-    return 0;
-  }
   int count = 0;
   int pos = word.find(letter);
   while(word.find(letter, pos) != std::string::npos){    
