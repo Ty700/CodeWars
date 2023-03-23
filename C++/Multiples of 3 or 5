@@ -1,0 +1,44 @@
+/*
+If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+Finish the solution so that it returns the sum of all the multiples of 3 or 5 below the number passed in. Additionally, if the number is negative, return 0 (for languages that do have them).
+
+Note: If the number is a multiple of both 3 and 5, only count it once.
+*/
+
+//Not at all efficient but gets the job done. 
+
+#include <vector>
+#include <algorithm>
+
+int solution(int number) 
+{
+  std::vector<int> numsToAdd;
+  int three = 3;
+  int five = 5;
+  
+  while(five < number){
+    numsToAdd.push_back(five);
+    five += 5;
+  }
+  
+  while(three < number){
+    numsToAdd.push_back(three);
+    three += 3;
+  }
+  
+  std::sort(numsToAdd.begin(), numsToAdd.end());
+  
+  for(int i = 0; i < numsToAdd.size(); i++){
+    for(int j = i+1; j < numsToAdd.size(); j++){
+      if(numsToAdd.at(i) == numsToAdd.at(j)){
+        numsToAdd.erase(numsToAdd.begin() + i);
+      }
+    }
+  }
+  int result = 0;
+  for(int i = 0; i < numsToAdd.size(); i++){
+    result += numsToAdd.at(i);
+  }
+  return result;
+}
